@@ -1,0 +1,117 @@
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: scale(1.04);
+  animation: hero-drift 18s var(--ease) infinite alternate;
+}
+
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 17, 14, 0.5) 0%, rgba(20, 17, 14, 0.2) 35%, rgba(20, 17, 14, 0.9) 100%),
+    linear-gradient(90deg, rgba(20, 17, 14, 0.55) 0%, transparent 55%);
+}
+
+.hero__steam {
+  position: absolute;
+  bottom: 35%;
+  left: 8%;
+  width: 45%;
+  height: 40%;
+  background:
+    radial-gradient(ellipse at 30% 80%, rgba(240, 232, 220, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 70%, rgba(232, 168, 32, 0.08) 0%, transparent 45%);
+  filter: blur(20px);
+  animation: steam-sway 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: var(--space-xl) var(--space-md) var(--space-lg);
+}
+
+.hero__brand {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--bone);
+  margin-bottom: var(--space-sm);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
+}
+
+.hero__headline {
+  font-family: var(--font-body);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--bone-muted);
+  max-width: 22ch;
+  margin-bottom: var(--space-sm);
+  line-height: 1.35;
+}
+
+.hero__support {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: rgba(240, 232, 220, 0.78);
+  max-width: 34ch;
+  margin-bottom: var(--space-md);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+@keyframes steam-sway {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateY(0) scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-12px) scaleX(1.08);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__content {
+    padding-bottom: var(--space-md);
+  }
+}

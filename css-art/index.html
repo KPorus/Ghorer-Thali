@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ঘরের থালি: CSS Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Bengali:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="top-bar">
+      <button
+        type="button"
+        class="lang-toggle"
+        id="langToggle"
+        aria-label="Switch to English"
+        data-i18n-aria="langAria"
+      >
+        English
+      </button>
+    </div>
+    <main class="stage" data-i18n-aria="stageAria" aria-label="দক্ষিণ এশিয়ার আরামের খাবারের CSS আর্ট">
+      <header class="caption">
+        <p class="caption__eyebrow">Comfort Food · CSS Art</p>
+        <h1 class="caption__title" data-i18n="title">ঘরের থালি</h1>
+        <p class="caption__note" data-i18n="note">
+          পেশোয়ারি মাংস · গরুর কারি · মুরগির বিরিয়ানি · শুধুমাত্র CSS
+        </p>
+        <p class="caption__hint" data-i18n="hint">একটি থালায় ক্লিক করে সুগন্ধ ও বাষ্প দেখুন</p>
+      </header>
+
+      <div
+        class="feast"
+        id="feast"
+        role="group"
+        data-i18n-aria="feastAria"
+        aria-label="বাঁয়ে পেশোয়ারি মাংস, মাঝে মুরগির বিরিয়ানি, ডানে গরুর কারি"
+      >
+        <div class="props" aria-hidden="true">
+          <div class="lantern lantern--left">
+            <span class="lantern__top"></span>
+            <span class="lantern__body"></span>
+            <span class="lantern__glow"></span>
+          </div>
+          <div class="lantern lantern--right">
+            <span class="lantern__top"></span>
+            <span class="lantern__body"></span>
+            <span class="lantern__glow"></span>
+          </div>
+          <div class="spice-bowl spice-bowl--left">
+            <span class="spice-mound spice-mound--red"></span>
+          </div>
+          <div class="spice-bowl spice-bowl--right">
+            <span class="spice-mound spice-mound--gold"></span>
+          </div>
+          <div class="spice-bowl spice-bowl--mid">
+            <span class="spice-mound spice-mound--green"></span>
+          </div>
+          <div class="lemon"></div>
+          <div class="lemon lemon--half"></div>
+          <div class="spoon">
+            <span class="spoon__bowl"></span>
+            <span class="spoon__handle"></span>
+          </div>
+          <div class="naan">
+            <span class="naan__blister n--1"></span>
+            <span class="naan__blister n--2"></span>
+            <span class="naan__blister n--3"></span>
+          </div>
+          <div class="salad">
+            <span class="salad__cuke"></span>
+            <span class="salad__onion"></span>
+            <span class="salad__tomato"></span>
+          </div>
+          <div class="star-anise sa--1"></div>
+          <div class="star-anise sa--2"></div>
+          <div class="cardamom card--1"></div>
+          <div class="cardamom card--2"></div>
+          <div class="cardamom card--3"></div>
+          <div class="bay-leaf"></div>
+          <div class="oil-lamp">
+            <span class="oil-lamp__base"></span>
+            <span class="oil-lamp__flame"></span>
+          </div>
+          <div class="chili-pod chili-pod--a"></div>
+          <div class="chili-pod chili-pod--b"></div>
+          <div class="chili-pod chili-pod--c"></div>
+          <div class="spice-dust">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="steam steam--global" aria-hidden="true">
+          <span class="plume plume--1"></span>
+          <span class="plume plume--2"></span>
+          <span class="plume plume--3"></span>
+          <span class="plume plume--4"></span>
+          <span class="plume plume--5"></span>
+        </div>
+
+        <div class="aroma" id="aroma" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+
+        <article
+          class="dish dish--peshawari"
+          tabindex="0"
+          role="button"
+          data-dish="peshawari"
+          aria-pressed="false"
+        >
+          <span class="dish__label" data-i18n="labelPeshawari">পেশোয়ারি মাংস</span>
+          <div class="steam steam--focus" aria-hidden="true">
+            <span class="plume plume--f1"></span>
+            <span class="plume plume--f2"></span>
+          </div>
+          <div class="tray">
+            <div class="tray__broth"></div>
+            <div class="marrow-bone mb--1">
+              <span class="marrow-bone__tube"></span>
+              <span class="marrow-bone__core"></span>
+            </div>
+            <div class="marrow-bone mb--2">
+              <span class="marrow-bone__tube"></span>
+              <span class="marrow-bone__core"></span>
+            </div>
+            <div class="namkeen-meat nm--1"></div>
+            <div class="namkeen-meat nm--2"></div>
+            <div class="namkeen-meat nm--3"></div>
+            <div class="potato p--1"></div>
+            <div class="potato p--2"></div>
+            <div class="potato p--3"></div>
+            <div class="peppercorn pc--1"></div>
+            <div class="peppercorn pc--2"></div>
+            <div class="peppercorn pc--3"></div>
+            <div class="peppercorn pc--4"></div>
+            <div class="peppercorn pc--5"></div>
+            <div class="peppercorn pc--6"></div>
+            <div class="green-chili gc--1"></div>
+            <div class="green-chili gc--2"></div>
+          </div>
+          <div class="dish__shadow"></div>
+        </article>
+
+        <article
+          class="dish dish--biryani"
+          tabindex="0"
+          role="button"
+          data-dish="biryani"
+          aria-pressed="false"
+        >
+          <span class="dish__label" data-i18n="labelBiryani">মুরগির বিরিয়ানি</span>
+          <div class="steam steam--biryani">
+            <span class="plume plume--b1"></span>
+            <span class="plume plume--b2"></span>
+            <span class="plume plume--b3"></span>
+          </div>
+          <div class="steam steam--focus" aria-hidden="true">
+            <span class="plume plume--f1"></span>
+            <span class="plume plume--f2"></span>
+          </div>
+          <div class="handi">
+            <div class="handi__lid"></div>
+            <div class="handi__body">
+              <div class="handi__rim"></div>
+              <div class="biryani">
+                <div class="rice rice--base"></div>
+                <div class="rice rice--saffron"></div>
+                <div class="rice rice--grainy"></div>
+                <div class="drumstick">
+                  <span class="drumstick__meat"></span>
+                  <span class="drumstick__joint"></span>
+                  <span class="drumstick__bone"></span>
+                </div>
+                <div class="thigh">
+                  <span class="thigh__skin"></span>
+                </div>
+                <div class="wing-bit"></div>
+                <div class="fried-onion fo--1"></div>
+                <div class="fried-onion fo--2"></div>
+                <div class="fried-onion fo--3"></div>
+                <div class="fried-onion fo--4"></div>
+                <div class="fried-onion fo--5"></div>
+                <div class="mint-leaf mint--1"></div>
+                <div class="mint-leaf mint--2"></div>
+                <div class="mint-leaf mint--3"></div>
+                <div class="egg-boil"></div>
+              </div>
+            </div>
+          </div>
+          <div class="dish__shadow dish__shadow--wide"></div>
+        </article>
+
+        <article
+          class="dish dish--curry"
+          tabindex="0"
+          role="button"
+          data-dish="curry"
+          aria-pressed="false"
+        >
+          <span class="dish__label" data-i18n="labelCurry">গরুর কারি</span>
+          <div class="steam steam--focus" aria-hidden="true">
+            <span class="plume plume--f1"></span>
+            <span class="plume plume--f2"></span>
+          </div>
+          <div class="bowl">
+            <div class="bowl__rim"></div>
+            <div class="bowl__inner">
+              <div class="gravy"></div>
+              <div class="oil-sheen"></div>
+              <div class="bone-chunk bc--1">
+                <span class="bone-chunk__meat"></span>
+                <span class="bone-chunk__bone"></span>
+                <span class="bone-chunk__marrow"></span>
+              </div>
+              <div class="bone-chunk bc--2">
+                <span class="bone-chunk__meat"></span>
+                <span class="bone-chunk__bone"></span>
+              </div>
+              <div class="bone-chunk bc--3">
+                <span class="bone-chunk__meat"></span>
+              </div>
+              <div class="cilantro c--1"></div>
+              <div class="cilantro c--2"></div>
+              <div class="cilantro c--3"></div>
+              <div class="cilantro c--4"></div>
+              <div class="cilantro c--5"></div>
+              <div class="chili-float"></div>
+            </div>
+          </div>
+          <div class="dish__shadow"></div>
+        </article>
+
+        <div class="table-cloth" aria-hidden="true"></div>
+      </div>
+
+      <p class="focus-note" id="focusNote" role="status" aria-live="polite"></p>
+
+      <button type="button" class="pause-btn" id="pauseBtn" aria-pressed="false" data-i18n="pause">
+        বাষ্প থামান
+      </button>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

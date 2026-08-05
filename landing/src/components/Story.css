@@ -1,0 +1,35 @@
+.story {
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 20%, rgba(232, 168, 32, 0.08) 0%, transparent 50%),
+    var(--ink);
+}
+
+.story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.story__figure {
+  margin: 0;
+  overflow: hidden;
+}
+
+.story__figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(0.95) contrast(1.04);
+}
+
+@media (max-width: 800px) {
+  .story__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .story__figure {
+    order: -1;
+  }
+}

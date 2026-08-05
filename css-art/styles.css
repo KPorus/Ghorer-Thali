@@ -1,0 +1,1565 @@
+/* ঘরের থালি — CSS Art Feast */
+
+:root {
+  --ink: #12100e;
+  --ink-soft: #1c1814;
+  --saffron: #e8a820;
+  --saffron-light: #f5d06a;
+  --rice: #f0e0a8;
+  --rice-deep: #d4b878;
+  --meat: #7a3020;
+  --meat-raw: #a84838;
+  --meat-deep: #4a1810;
+  --meat-char: #2a1008;
+  --fat: #e8d0a8;
+  --bone: #e8e0d0;
+  --bone-edge: #c8b8a0;
+  --marrow: #d4a090;
+  --gravy: #a84818;
+  --gravy-deep: #6e2810;
+  --oil: rgba(232, 168, 32, 0.45);
+  --chili: #c83020;
+  --chili-dark: #8a1810;
+  --cilantro: #3d7a38;
+  --cilantro-light: #6aaa55;
+  --onion: #c87840;
+  --onion-dark: #8a4820;
+  --plate: #e8e0d4;
+  --plate-rim: #f4efe6;
+  --handi: #8a6040;
+  --handi-dark: #5a3820;
+  --copper: #b87840;
+  --text: #f0e8dc;
+  --muted: #9a8e7e;
+  --accent: var(--saffron);
+  --font-display: "Noto Sans Bengali", "Bricolage Grotesque", system-ui, sans-serif;
+  --font-latin: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font-display);
+  color: var(--text);
+  background:
+    radial-gradient(ellipse 50% 35% at 12% 10%, rgba(200, 80, 40, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 88% 12%, rgba(232, 168, 32, 0.1) 0%, transparent 45%),
+    radial-gradient(ellipse 90% 55% at 50% 15%, #2a2018 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, #1a1410 0%, transparent 50%),
+    radial-gradient(ellipse 40% 35% at 85% 70%, #241810 0%, transparent 45%),
+    linear-gradient(165deg, var(--ink) 0%, var(--ink-soft) 50%, #0e0c0a 100%);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem 1rem 3rem;
+}
+
+.top-bar {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+}
+
+.lang-toggle {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--accent);
+  border: none;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.lang-toggle:hover,
+.lang-toggle:focus-visible {
+  background: var(--plate-rim);
+  outline: none;
+}
+
+.lang-toggle:active {
+  transform: scale(0.98);
+}
+
+.caption {
+  text-align: center;
+  animation: fade-up 0.9s ease both;
+}
+
+.caption__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.caption__title {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--plate-rim);
+  line-height: 1.15;
+}
+
+.caption__note {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 40ch;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+
+.caption__hint {
+  margin-top: 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--saffron-light);
+  animation: hint-pulse 2.4s ease-in-out infinite;
+}
+
+.feast {
+  position: relative;
+  width: min(760px, 96vw);
+  height: min(440px, 78vw);
+  margin-top: 0.75rem;
+  animation: fade-up 1s 0.12s ease both;
+}
+
+.table-cloth {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  translate: -50% 0;
+  width: 96%;
+  height: 22%;
+  background:
+    radial-gradient(ellipse at center, rgba(232, 168, 32, 0.14) 0%, transparent 70%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(180, 120, 60, 0.06) 0 8px,
+      transparent 8px 16px
+    );
+  border-radius: 50%;
+  filter: blur(1px);
+  z-index: 0;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Table props */
+.props {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hanging lanterns */
+.lantern {
+  position: absolute;
+  top: 2%;
+  width: 6%;
+  height: 18%;
+  z-index: 7;
+  animation: lantern-sway 5s ease-in-out infinite;
+}
+
+.lantern--left {
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.lantern--right {
+  right: 8%;
+  animation-delay: 1.2s;
+}
+
+.lantern__top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 2px;
+  height: 28%;
+  background: #8a7060;
+}
+
+.lantern__body {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  translate: -50% 0;
+  width: 100%;
+  height: 55%;
+  background: linear-gradient(180deg, #c84828 0%, #8a2010 55%, #5a1808 100%);
+  border-radius: 20% 20% 35% 35%;
+  box-shadow:
+    inset 0 0 8px rgba(255, 180, 60, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.lantern__body::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  right: 15%;
+  height: 35%;
+  background: rgba(255, 200, 80, 0.25);
+  border-radius: 20%;
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+}
+
+.lantern__glow {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  translate: -50% 0;
+  width: 160%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(255, 160, 40, 0.35) 0%, transparent 70%);
+  filter: blur(6px);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes lantern-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2.5deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.spice-bowl {
+  position: absolute;
+  width: 7%;
+  height: 10%;
+  bottom: 22%;
+  background: linear-gradient(180deg, #6a5040, #3a2818);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.spice-bowl--left { left: 5%; }
+.spice-bowl--right { right: 6%; bottom: 30%; }
+.spice-bowl--mid {
+  left: 22%;
+  bottom: 14%;
+  width: 5.5%;
+  height: 8%;
+}
+
+.spice-mound {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  translate: -50% 0;
+  width: 70%;
+  height: 45%;
+  border-radius: 50%;
+}
+
+.spice-mound--red {
+  background: radial-gradient(circle at 40% 35%, #e05030, #8a2010);
+}
+
+.spice-mound--gold {
+  background: radial-gradient(circle at 40% 35%, #f0c040, #b87010);
+}
+
+.spice-mound--green {
+  background: radial-gradient(circle at 40% 35%, #7aaa50, #3a6820);
+}
+
+.lemon {
+  position: absolute;
+  bottom: 30%;
+  left: 16%;
+  width: 5.5%;
+  height: 8%;
+  background: radial-gradient(circle at 35% 35%, #f5e070, #d4a820 60%, #b88810);
+  border-radius: 50%;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transform: rotate(-20deg);
+  z-index: 3;
+}
+
+.lemon::after {
+  content: "";
+  position: absolute;
+  inset: 22%;
+  background: radial-gradient(circle, #fff8d0 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.lemon--half {
+  left: 20%;
+  bottom: 26%;
+  width: 4.5%;
+  height: 6.5%;
+  clip-path: none;
+  border-radius: 50% 8% 50% 50%;
+  transform: rotate(55deg);
+  background: radial-gradient(circle at 30% 40%, #fff8c8 0%, #f0d050 45%, #c89818 100%);
+}
+
+.spoon {
+  position: absolute;
+  bottom: 24%;
+  right: 16%;
+  width: 14%;
+  height: 8%;
+  transform: rotate(-35deg);
+  z-index: 4;
+}
+
+.spoon__bowl {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 38%;
+  height: 80%;
+  background: linear-gradient(135deg, #d0c8b8, #8a8070);
+  border-radius: 50%;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.spoon__handle {
+  position: absolute;
+  left: 30%;
+  top: 38%;
+  width: 70%;
+  height: 22%;
+  background: linear-gradient(90deg, #a09888, #d0c8b8);
+  border-radius: 2px;
+}
+
+/* Naan bread */
+.naan {
+  position: absolute;
+  bottom: 12%;
+  left: 32%;
+  width: 16%;
+  height: 14%;
+  background:
+    radial-gradient(ellipse at 40% 40%, #f0d8a0 0%, #d4a868 50%, #b88848 100%);
+  border-radius: 55% 48% 52% 45%;
+  transform: rotate(-12deg);
+  box-shadow:
+    inset 2px 2px 6px rgba(255, 240, 200, 0.35),
+    0 3px 8px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.naan__blister {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(140, 80, 30, 0.35);
+}
+
+.n--1 { width: 18%; height: 22%; top: 25%; left: 30%; }
+.n--2 { width: 14%; height: 16%; top: 45%; left: 55%; background: rgba(180, 100, 40, 0.3); }
+.n--3 { width: 12%; height: 14%; top: 35%; left: 15%; }
+
+/* Fresh salad side */
+.salad {
+  position: absolute;
+  bottom: 14%;
+  right: 30%;
+  width: 10%;
+  height: 12%;
+  z-index: 2;
+}
+
+.salad__cuke {
+  position: absolute;
+  width: 55%;
+  height: 28%;
+  top: 20%;
+  left: 10%;
+  background: linear-gradient(90deg, #4a8a38, #7aba58);
+  border-radius: 40%;
+  transform: rotate(-25deg);
+}
+
+.salad__onion {
+  position: absolute;
+  width: 40%;
+  height: 35%;
+  top: 35%;
+  left: 45%;
+  border: 2px solid rgba(220, 180, 200, 0.7);
+  border-radius: 50%;
+  transform: rotate(20deg);
+}
+
+.salad__tomato {
+  position: absolute;
+  width: 35%;
+  height: 32%;
+  top: 50%;
+  left: 20%;
+  background: radial-gradient(circle at 35% 35%, #e05040, #a02018);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Whole spices */
+.star-anise {
+  position: absolute;
+  width: 4%;
+  height: 6%;
+  z-index: 3;
+  background: radial-gradient(circle, #5a3018 30%, transparent 32%);
+}
+
+.star-anise::before,
+.star-anise::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  background: conic-gradient(
+    from 0deg,
+    #6a3820 0deg 20deg,
+    transparent 20deg 40deg,
+    #6a3820 40deg 60deg,
+    transparent 60deg 80deg,
+    #6a3820 80deg 100deg,
+    transparent 100deg 120deg,
+    #6a3820 120deg 140deg,
+    transparent 140deg 160deg,
+    #6a3820 160deg 180deg,
+    transparent 180deg 200deg,
+    #6a3820 200deg 220deg,
+    transparent 220deg 240deg,
+    #6a3820 240deg 260deg,
+    transparent 260deg 280deg,
+    #6a3820 280deg 300deg,
+    transparent 300deg 320deg,
+    #6a3820 320deg 340deg,
+    transparent 340deg 360deg
+  );
+  border-radius: 50%;
+}
+
+.sa--1 {
+  bottom: 36%;
+  left: 28%;
+  transform: rotate(15deg);
+}
+
+.sa--2 {
+  bottom: 40%;
+  right: 28%;
+  transform: rotate(-25deg);
+  width: 3.5%;
+  height: 5%;
+}
+
+.cardamom {
+  position: absolute;
+  width: 2.2%;
+  height: 3.5%;
+  background: linear-gradient(180deg, #6a9848, #3a6828);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: inset 1px 0 2px rgba(255, 255, 200, 0.2);
+  z-index: 3;
+}
+
+.card--1 { bottom: 34%; left: 34%; transform: rotate(40deg); }
+.card--2 { bottom: 38%; left: 37%; transform: rotate(-15deg); }
+.card--3 { bottom: 42%; right: 34%; transform: rotate(60deg); }
+
+.bay-leaf {
+  position: absolute;
+  bottom: 32%;
+  right: 38%;
+  width: 5%;
+  height: 3%;
+  background: linear-gradient(90deg, #3a6820, #6a9840);
+  border-radius: 50% 10% 50% 10%;
+  transform: rotate(-40deg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+/* Oil lamp */
+.oil-lamp {
+  position: absolute;
+  bottom: 28%;
+  left: 2%;
+  width: 5%;
+  height: 12%;
+  z-index: 3;
+}
+
+.oil-lamp__base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 90%;
+  height: 55%;
+  background: linear-gradient(180deg, #c49048, #6a4020);
+  border-radius: 40% 40% 30% 30%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.oil-lamp__flame {
+  position: absolute;
+  bottom: 48%;
+  left: 50%;
+  translate: -50% 0;
+  width: 35%;
+  height: 40%;
+  background: radial-gradient(ellipse at 50% 80%, #fff8c0 0%, #f0a020 45%, #c84810 100%);
+  border-radius: 50% 50% 40% 40%;
+  animation: flame-flicker 1.2s ease-in-out infinite;
+  filter: blur(0.3px);
+}
+
+@keyframes flame-flicker {
+  0%, 100% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 0.95; }
+  40% { transform: translateX(-48%) scaleY(1.12) scaleX(0.9); opacity: 1; }
+  70% { transform: translateX(-52%) scaleY(0.92) scaleX(1.05); opacity: 0.85; }
+}
+
+.chili-pod {
+  position: absolute;
+  width: 4%;
+  height: 2.5%;
+  background: linear-gradient(90deg, var(--chili-dark), var(--chili));
+  border-radius: 40% 60% 50% 50%;
+}
+
+.chili-pod--a {
+  bottom: 38%;
+  left: 12%;
+  transform: rotate(50deg);
+}
+
+.chili-pod--b {
+  bottom: 42%;
+  right: 14%;
+  transform: rotate(-40deg);
+  width: 3.5%;
+}
+
+.chili-pod--c {
+  bottom: 18%;
+  left: 48%;
+  transform: rotate(15deg);
+  width: 3%;
+}
+
+/* Floating spice dust */
+.spice-dust span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--saffron);
+  opacity: 0;
+  animation: dust-float 4.5s ease-in-out infinite;
+}
+
+.spice-dust span:nth-child(1) { left: 20%; bottom: 50%; animation-delay: 0s; }
+.spice-dust span:nth-child(2) { left: 40%; bottom: 55%; animation-delay: 0.7s; background: var(--chili); }
+.spice-dust span:nth-child(3) { left: 55%; bottom: 48%; animation-delay: 1.4s; }
+.spice-dust span:nth-child(4) { left: 70%; bottom: 58%; animation-delay: 2s; background: #c87030; }
+.spice-dust span:nth-child(5) { left: 30%; bottom: 60%; animation-delay: 2.6s; }
+.spice-dust span:nth-child(6) { left: 80%; bottom: 52%; animation-delay: 3.2s; background: var(--chili); }
+
+@keyframes dust-float {
+  0% { opacity: 0; transform: translateY(0) scale(0.6); }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-50px) scale(1.2); }
+}
+
+body.is-paused .lantern,
+body.is-paused .lantern__glow,
+body.is-paused .oil-lamp__flame,
+body.is-paused .spice-dust span {
+  animation-play-state: paused;
+}
+
+/* Dishes */
+.dish {
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+  outline: none;
+  transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+}
+
+.dish:hover {
+  filter: brightness(1.06);
+  transform: translateY(-3px);
+}
+
+.dish:focus-visible {
+  outline: 2px solid var(--saffron);
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+
+.dish--biryani:hover {
+  transform: translateY(-3px);
+}
+
+.feast[data-focus] .dish.is-dimmed {
+  opacity: 0.28;
+  filter: grayscale(0.35) brightness(0.75);
+  transform: scale(0.96);
+  pointer-events: auto;
+}
+
+.feast[data-focus] .dish.is-focused {
+  z-index: 8;
+  filter: brightness(1.08);
+  transform: translateY(-6px) scale(1.06);
+}
+
+.feast[data-focus="biryani"] .dish.is-focused {
+  transform: translateY(-6px) scale(1.06);
+}
+
+.dish .steam--focus {
+  display: none;
+  z-index: 10;
+}
+
+.dish.is-focused .steam--focus {
+  display: block;
+  position: absolute;
+  top: -12%;
+  left: 50%;
+  translate: -50% 0;
+  width: 70%;
+  height: 40%;
+}
+
+.plume--f1 { left: 25%; animation-delay: 0.1s; height: 90%; width: 20px; }
+.plume--f2 { left: 55%; animation-delay: 0.5s; height: 85%; width: 16px; }
+
+.aroma {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.aroma.is-active {
+  opacity: 1;
+}
+
+.aroma span {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 168, 32, 0.35) 0%, transparent 70%);
+  filter: blur(8px);
+  animation: aroma-drift 3s ease-in-out infinite;
+}
+
+.aroma[data-flavor="peshawari"] span { left: 12%; }
+.aroma[data-flavor="biryani"] span { left: 42%; }
+.aroma[data-flavor="curry"] span { left: 72%; }
+
+.aroma span:nth-child(1) { bottom: 45%; animation-delay: 0s; }
+.aroma span:nth-child(2) { bottom: 52%; left: calc(var(--base, 42%) + 6%); animation-delay: 0.6s; width: 28px; height: 28px; }
+.aroma span:nth-child(3) { bottom: 58%; animation-delay: 1.2s; }
+.aroma span:nth-child(4) { bottom: 48%; animation-delay: 1.8s; width: 22px; height: 22px; background: radial-gradient(circle, rgba(200, 120, 40, 0.3) 0%, transparent 70%); }
+
+@keyframes aroma-drift {
+  0%, 100% { opacity: 0.35; transform: translateY(0) scale(1); }
+  50% { opacity: 0.85; transform: translateY(-28px) scale(1.25); }
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.focus-note {
+  min-height: 1.5rem;
+  margin-top: 0.35rem;
+  max-width: 40ch;
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--saffron-light);
+  line-height: 1.45;
+}
+
+.dish__label {
+  position: absolute;
+  top: -1.55rem;
+  left: 50%;
+  translate: -50% 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--saffron-light);
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.dish__shadow {
+  position: absolute;
+  bottom: -4%;
+  left: 50%;
+  translate: -50% 0;
+  width: 70%;
+  height: 12%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.5) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.dish__shadow--wide { width: 85%; }
+
+.dish--peshawari {
+  left: 1%;
+  bottom: 16%;
+  width: 30%;
+  height: 46%;
+  animation: settle 1.1s 0.2s ease both;
+}
+
+.dish--biryani {
+  left: 50%;
+  bottom: 10%;
+  width: 42%;
+  height: 60%;
+  margin-left: -21%;
+  z-index: 3;
+  animation: settle 1.1s 0.35s ease both;
+}
+
+.dish--curry {
+  right: 1%;
+  bottom: 16%;
+  width: 28%;
+  height: 48%;
+  animation: settle 1.1s 0.5s ease both;
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Steam */
+.steam { pointer-events: none; z-index: 6; }
+
+.steam--global {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  translate: -50% 0;
+  width: 70%;
+  height: 35%;
+}
+
+.steam--biryani {
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  translate: -50% 0;
+  width: 80%;
+  height: 30%;
+  z-index: 8;
+}
+
+.plume {
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 70%;
+  border-radius: 50%;
+  background: linear-gradient(to top, transparent 0%, rgba(240, 232, 220, 0.5) 40%, transparent 100%);
+  filter: blur(7px);
+  opacity: 0;
+  animation: steam-rise 3.4s ease-in-out infinite;
+}
+
+.plume--1 { left: 10%; animation-delay: 0s; height: 75%; }
+.plume--2 { left: 28%; width: 20px; animation-delay: 0.6s; height: 90%; }
+.plume--3 { left: 48%; animation-delay: 1.2s; height: 80%; }
+.plume--4 { left: 65%; width: 14px; animation-delay: 1.8s; height: 70%; }
+.plume--5 { left: 80%; animation-delay: 2.4s; height: 65%; }
+.plume--b1 { left: 20%; animation-delay: 0.3s; height: 85%; width: 18px; }
+.plume--b2 { left: 45%; animation-delay: 1s; height: 95%; width: 22px; }
+.plume--b3 { left: 68%; animation-delay: 1.7s; height: 78%; }
+
+body.is-paused .plume { animation-play-state: paused; }
+
+@keyframes steam-rise {
+  0% { opacity: 0; transform: translateY(16px) scaleX(0.75); }
+  25% { opacity: 0.65; }
+  65% { opacity: 0.35; transform: translateY(-36px) scaleX(1.35); }
+  100% { opacity: 0; transform: translateY(-72px) scaleX(1.7); }
+}
+
+/* —— Peshawari namkeen tray —— */
+.tray {
+  position: relative;
+  width: 100%;
+  height: 88%;
+  background: linear-gradient(160deg, rgba(230, 236, 240, 0.55) 0%, rgba(180, 190, 198, 0.35) 100%);
+  border: 2px solid rgba(200, 210, 218, 0.65);
+  border-radius: 10% / 14%;
+  box-shadow:
+    inset 0 2px 8px rgba(255, 255, 255, 0.35),
+    0 10px 24px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.tray__broth {
+  position: absolute;
+  inset: 8% 6% 10%;
+  background:
+    radial-gradient(ellipse at 40% 40%, rgba(232, 200, 90, 0.55) 0%, transparent 55%),
+    linear-gradient(165deg, #d4b060 0%, #b88838 45%, #8a6228 100%);
+  border-radius: 8% / 12%;
+  opacity: 0.92;
+}
+
+.tray__broth::after {
+  content: "";
+  position: absolute;
+  inset: 10% 15% auto;
+  height: 35%;
+  background: radial-gradient(ellipse, rgba(255, 240, 180, 0.35) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.marrow-bone {
+  position: absolute;
+  z-index: 4;
+  width: 22%;
+  height: 38%;
+}
+
+.mb--1 { top: 18%; left: 28%; transform: rotate(-18deg); }
+.mb--2 { top: 28%; left: 48%; width: 18%; height: 32%; transform: rotate(22deg); }
+
+.marrow-bone__tube {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f0e8d8 0%, #d8c8b0 50%, #c0b098 100%);
+  border-radius: 40% 40% 35% 35%;
+  box-shadow:
+    inset -2px -2px 4px rgba(0, 0, 0, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.marrow-bone__core {
+  position: absolute;
+  top: 18%;
+  left: 22%;
+  width: 56%;
+  height: 28%;
+  background: radial-gradient(circle, #e8b8a0 0%, #c89078 70%);
+  border-radius: 50%;
+}
+
+.namkeen-meat {
+  position: absolute;
+  z-index: 3;
+  border-radius: 40% 35% 45% 38%;
+  background: linear-gradient(145deg, #8a6860 0%, #5a4038 50%, #3a2820 100%);
+  box-shadow:
+    inset 1px 1px 4px rgba(200, 160, 140, 0.2),
+    0 2px 5px rgba(0, 0, 0, 0.35);
+}
+
+.nm--1 { width: 34%; height: 28%; top: 42%; left: 12%; transform: rotate(-12deg); }
+.nm--2 { width: 30%; height: 26%; top: 48%; left: 42%; transform: rotate(18deg); }
+.nm--3 { width: 26%; height: 22%; top: 22%; left: 62%; transform: rotate(-8deg); }
+
+.potato {
+  position: absolute;
+  z-index: 3;
+  border-radius: 45% 50% 48% 42%;
+  background: radial-gradient(circle at 35% 35%, #f5e8b0 0%, #e0c878 55%, #c8a848 100%);
+  box-shadow: inset -2px -2px 4px rgba(140, 100, 40, 0.25);
+}
+
+.p--1 { width: 22%; height: 20%; top: 58%; left: 68%; }
+.p--2 { width: 20%; height: 18%; top: 62%; left: 22%; transform: rotate(20deg); }
+.p--3 { width: 18%; height: 16%; top: 35%; left: 72%; transform: rotate(-15deg); }
+
+.peppercorn {
+  position: absolute;
+  z-index: 5;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #4a4038, #1a1410);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.pc--1 { top: 30%; left: 40%; }
+.pc--2 { top: 48%; left: 35%; }
+.pc--3 { top: 55%; left: 58%; }
+.pc--4 { top: 38%; left: 55%; width: 4px; height: 4px; }
+.pc--5 { top: 65%; left: 45%; }
+.pc--6 { top: 44%; left: 72%; width: 4px; height: 4px; }
+
+.green-chili {
+  position: absolute;
+  z-index: 5;
+  width: 18%;
+  height: 7%;
+  background: linear-gradient(90deg, #2a6820, #5aaa40);
+  border-radius: 40% 60% 50% 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.gc--1 { top: 20%; left: 18%; transform: rotate(35deg); }
+.gc--2 { top: 52%; left: 78%; width: 14%; transform: rotate(-50deg); }
+
+body.is-paused .tray__broth::after,
+body.is-paused .oil-sheen,
+body.is-paused .gravy,
+body.is-paused .rice--saffron,
+body.is-paused .aroma span {
+  animation-play-state: paused;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.chili {
+  position: absolute;
+  width: 20%;
+  height: 9%;
+  background: linear-gradient(90deg, var(--chili-dark), var(--chili));
+  border-radius: 40% 60% 50% 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+.chili--1 { top: 12%; left: 58%; transform: rotate(40deg); }
+.chili--2 { top: 68%; left: 55%; transform: rotate(-30deg); width: 16%; }
+
+.chili::after {
+  content: "";
+  position: absolute;
+  top: -45%;
+  left: 0;
+  width: 28%;
+  height: 80%;
+  background: var(--cilantro);
+  border-radius: 2px;
+  transform: rotate(-20deg);
+}
+
+.onion-ring {
+  position: absolute;
+  border: 2.5px solid var(--onion);
+  border-radius: 50%;
+  opacity: 0.9;
+  z-index: 5;
+}
+
+.onion-ring--1 {
+  width: 24%;
+  height: 18%;
+  top: 22%;
+  left: 62%;
+  transform: rotate(15deg);
+  border-color: var(--onion) transparent var(--onion-dark) var(--onion);
+}
+
+.onion-ring--2 {
+  width: 20%;
+  height: 15%;
+  top: 55%;
+  left: 8%;
+  transform: rotate(-40deg);
+}
+
+.herb-dot {
+  position: absolute;
+  width: 7%;
+  height: 7%;
+  border-radius: 50% 40% 50% 40%;
+  background: var(--cilantro);
+  z-index: 5;
+}
+
+.herb-dot--a { top: 72%; left: 38%; }
+.herb-dot--b { top: 20%; left: 28%; background: var(--cilantro-light); width: 6%; height: 6%; }
+.herb-dot--c { top: 48%; left: 72%; width: 5%; height: 5%; }
+
+/* —— Biryani handi —— */
+.handi {
+  position: relative;
+  width: 100%;
+  height: 90%;
+}
+
+.handi__lid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 72%;
+  height: 14%;
+  background: linear-gradient(180deg, #c49058 0%, var(--copper) 40%, var(--handi-dark) 100%);
+  border-radius: 50% 50% 40% 40%;
+  z-index: 4;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.handi__lid::before {
+  content: "";
+  position: absolute;
+  top: -35%;
+  left: 50%;
+  translate: -50% 0;
+  width: 14%;
+  height: 55%;
+  background: linear-gradient(180deg, var(--saffron-light), var(--copper));
+  border-radius: 40%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.handi__body {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  translate: -50% 0;
+  width: 92%;
+  height: 88%;
+  background: linear-gradient(180deg, var(--handi) 0%, var(--handi-dark) 55%, #3a2410 100%);
+  border-radius: 12% 12% 48% 48% / 10% 10% 52% 52%;
+  box-shadow:
+    inset 0 -16px 30px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 200, 120, 0.2),
+    0 16px 36px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.handi__rim {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 100%;
+  height: 18%;
+  background: linear-gradient(180deg, #c89860 0%, var(--handi) 100%);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.biryani {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  translate: -50% 0;
+  width: 86%;
+  height: 70%;
+  border-radius: 50% 50% 46% 46% / 35% 35% 55% 55%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.rice { position: absolute; inset: 0; }
+
+.rice--base {
+  background:
+    radial-gradient(ellipse 70% 50% at 45% 40%, var(--rice) 0%, var(--rice-deep) 70%, #b89858 100%);
+}
+
+.rice--saffron {
+  background:
+    radial-gradient(ellipse 40% 35% at 30% 30%, rgba(232, 168, 32, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 30% at 70% 45%, rgba(245, 208, 106, 0.4) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 25% at 50% 70%, rgba(200, 120, 30, 0.35) 0%, transparent 50%);
+  animation: saffron-glow 5s ease-in-out infinite;
+}
+
+@keyframes saffron-glow {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.rice--grainy {
+  background-image: radial-gradient(circle, rgba(180, 140, 60, 0.35) 0.8px, transparent 1px);
+  background-size: 5px 5px;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+
+/* Clear chicken drumstick */
+.drumstick {
+  position: absolute;
+  top: 22%;
+  left: 12%;
+  width: 42%;
+  height: 38%;
+  z-index: 4;
+  transform: rotate(-28deg);
+}
+
+.drumstick__meat {
+  position: absolute;
+  left: 0;
+  top: 15%;
+  width: 62%;
+  height: 70%;
+  background:
+    linear-gradient(135deg, #d89858 0%, #b86838 35%, #7a3820 70%, #4a2010 100%);
+  border-radius: 55% 40% 45% 50%;
+  box-shadow:
+    inset 2px 2px 5px rgba(255, 200, 120, 0.3),
+    0 3px 6px rgba(0, 0, 0, 0.35);
+}
+
+.drumstick__joint {
+  position: absolute;
+  left: 48%;
+  top: 28%;
+  width: 28%;
+  height: 42%;
+  background: linear-gradient(90deg, #a85830, #6a3018);
+  border-radius: 40%;
+}
+
+.drumstick__bone {
+  position: absolute;
+  right: 0;
+  top: 38%;
+  width: 32%;
+  height: 16%;
+  background: linear-gradient(90deg, var(--bone-edge), var(--bone));
+  border-radius: 2px 8px 8px 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.drumstick__bone::after {
+  content: "";
+  position: absolute;
+  right: -8%;
+  top: -40%;
+  width: 40%;
+  height: 180%;
+  background: var(--bone);
+  border-radius: 50%;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.thigh {
+  position: absolute;
+  top: 42%;
+  left: 48%;
+  width: 34%;
+  height: 30%;
+  z-index: 4;
+  transform: rotate(20deg);
+}
+
+.thigh__skin {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 35% 30%, #e0a868 0%, #b87040 40%, #6a3018 100%);
+  border-radius: 48% 42% 50% 45%;
+  box-shadow:
+    inset 1px 1px 4px rgba(255, 220, 160, 0.35),
+    0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.wing-bit {
+  position: absolute;
+  top: 58%;
+  left: 28%;
+  width: 20%;
+  height: 16%;
+  background: linear-gradient(135deg, #c88048, #5a2810);
+  border-radius: 40% 50% 45% 40%;
+  transform: rotate(-15deg);
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.egg-boil {
+  position: absolute;
+  top: 25%;
+  right: 12%;
+  width: 18%;
+  height: 22%;
+  background: radial-gradient(circle at 40% 40%, #fff8e8, #e8d8c0);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.egg-boil::after {
+  content: "";
+  position: absolute;
+  top: 28%;
+  left: 28%;
+  width: 42%;
+  height: 40%;
+  background: radial-gradient(circle at 35% 35%, #f0c040, #d48810);
+  border-radius: 50%;
+}
+
+.fried-onion {
+  position: absolute;
+  height: 2.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--onion-dark), var(--onion), var(--saffron));
+  opacity: 0.95;
+  z-index: 5;
+}
+
+.fo--1 { width: 22%; top: 18%; left: 35%; transform: rotate(-25deg); }
+.fo--2 { width: 18%; top: 28%; left: 55%; transform: rotate(15deg); }
+.fo--3 { width: 20%; top: 48%; left: 15%; transform: rotate(40deg); }
+.fo--4 { width: 16%; top: 62%; left: 60%; transform: rotate(-35deg); }
+.fo--5 { width: 14%; top: 38%; left: 70%; transform: rotate(55deg); }
+
+.mint-leaf {
+  position: absolute;
+  width: 11%;
+  height: 9%;
+  background: radial-gradient(ellipse at 40% 40%, var(--cilantro-light), var(--cilantro));
+  border-radius: 0 70% 10% 70%;
+  transform: rotate(-30deg);
+  z-index: 5;
+}
+
+.mint--1 { top: 16%; left: 42%; }
+.mint--2 { top: 68%; left: 48%; transform: rotate(50deg); width: 10%; }
+.mint--3 { top: 52%; left: 75%; transform: rotate(-10deg); width: 9%; }
+
+/* —— Curry bowl with bone-in meat —— */
+.bowl {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  background: linear-gradient(180deg, var(--plate-rim) 0%, var(--plate) 40%, #b8a898 100%);
+  border-radius: 10% 10% 48% 48% / 12% 12% 55% 55%;
+  box-shadow:
+    inset 0 -14px 28px rgba(0, 0, 0, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    0 12px 28px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.bowl__rim {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 104%;
+  height: 22%;
+  background: linear-gradient(180deg, #f8f4ec 0%, var(--plate) 100%);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.bowl__inner {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  translate: -50% 0;
+  width: 84%;
+  height: 68%;
+  border-radius: 50% 50% 46% 46% / 40% 40% 55% 55%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.gravy {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 50% at 40% 35%, #d86828 0%, transparent 50%),
+    radial-gradient(ellipse 80% 70% at 55% 55%, var(--gravy) 0%, var(--gravy-deep) 75%, #4a1808 100%);
+  animation: shimmer 4.5s ease-in-out infinite;
+}
+
+.oil-sheen {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 40%;
+  height: 30%;
+  background: radial-gradient(ellipse, var(--oil) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: oil-drift 6s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes oil-drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(8px, 4px); }
+}
+
+.bone-chunk {
+  position: absolute;
+  z-index: 4;
+}
+
+.bone-chunk__meat {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 40% 30%, var(--meat-raw) 0%, var(--meat) 45%, var(--meat-deep) 100%);
+  border-radius: 42% 38% 48% 40%;
+  box-shadow:
+    inset 2px 2px 5px rgba(200, 80, 60, 0.25),
+    0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.bone-chunk__bone {
+  position: absolute;
+  top: -18%;
+  right: 10%;
+  width: 35%;
+  height: 45%;
+  background: linear-gradient(180deg, var(--bone) 0%, var(--bone-edge) 100%);
+  border-radius: 30% 40% 35% 40%;
+  box-shadow: inset -1px -2px 3px rgba(0, 0, 0, 0.2);
+  transform: rotate(15deg);
+}
+
+.bone-chunk__marrow {
+  position: absolute;
+  top: -8%;
+  right: 18%;
+  width: 14%;
+  height: 18%;
+  background: var(--marrow);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.bc--1 {
+  width: 42%;
+  height: 38%;
+  top: 22%;
+  left: 15%;
+  transform: rotate(-18deg);
+}
+
+.bc--2 {
+  width: 36%;
+  height: 32%;
+  top: 38%;
+  left: 48%;
+  transform: rotate(30deg);
+}
+
+.bc--2 .bone-chunk__bone {
+  top: auto;
+  bottom: -12%;
+  right: auto;
+  left: -8%;
+  width: 40%;
+  height: 35%;
+  transform: rotate(-40deg);
+}
+
+.bc--3 {
+  width: 30%;
+  height: 26%;
+  top: 55%;
+  left: 28%;
+  transform: rotate(-5deg);
+}
+
+.cilantro {
+  position: absolute;
+  width: 9%;
+  height: 8%;
+  background: var(--cilantro);
+  border-radius: 50% 40% 50% 30%;
+  box-shadow: 1px 0 0 var(--cilantro-light);
+  z-index: 5;
+}
+
+.c--1 { top: 22%; left: 55%; }
+.c--2 { top: 32%; left: 72%; background: var(--cilantro-light); width: 7%; }
+.c--3 { top: 58%; left: 18%; transform: rotate(40deg); }
+.c--4 { top: 62%; left: 55%; width: 7%; height: 6%; }
+.c--5 { top: 45%; left: 8%; width: 6%; transform: rotate(-20deg); }
+
+.chili-float {
+  position: absolute;
+  top: 42%;
+  left: 70%;
+  width: 18%;
+  height: 8%;
+  background: linear-gradient(90deg, var(--chili-dark), var(--chili));
+  border-radius: 40% 60% 50% 50%;
+  transform: rotate(-50deg);
+  z-index: 5;
+}
+
+.pause-btn {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid rgba(154, 142, 126, 0.35);
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  animation: fade-up 1s 0.4s ease both;
+}
+
+.pause-btn:hover,
+.pause-btn:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.pause-btn[aria-pressed="true"] {
+  color: var(--ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 540px) {
+  .feast { height: min(540px, 140vw); }
+
+  .dish--peshawari {
+    left: 2%;
+    bottom: 44%;
+    width: 42%;
+    height: 28%;
+  }
+
+  .dish--biryani {
+    bottom: 6%;
+    width: 62%;
+    height: 44%;
+    margin-left: -31%;
+  }
+
+  .dish--curry {
+    right: 2%;
+    bottom: 44%;
+    width: 40%;
+    height: 30%;
+  }
+
+  .props .spice-bowl--mid,
+  .props .salad,
+  .props .naan,
+  .props .spice-dust,
+  .props .star-anise,
+  .props .cardamom,
+  .props .bay-leaf,
+  .props .oil-lamp {
+    display: none;
+  }
+  .dish__label { font-size: 0.68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plume,
+  .oil-sheen,
+  .gravy,
+  .rice--saffron,
+  .caption,
+  .feast,
+  .dish,
+  .pause-btn,
+  .lantern,
+  .lantern__glow,
+  .oil-lamp__flame,
+  .spice-dust span,
+  .caption__hint,
+  .aroma span,
+  .tray__broth::after {
+    animation: none !important;
+  }
+
+  .plume {
+    opacity: 0.3;
+    transform: translateY(-24px);
+  }
+
+  .caption,
+  .feast,
+  .dish,
+  .pause-btn {
+    opacity: 1;
+    transform: none;
+  }
+}

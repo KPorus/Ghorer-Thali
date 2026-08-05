@@ -1,0 +1,27 @@
+.site-footer {
+  padding: var(--space-md);
+  border-top: 1px solid rgba(240, 235, 227, 0.08);
+  background: var(--ink);
+}
+
+.site-footer__inner {
+  max-width: var(--max);
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  align-items: baseline;
+}
+
+.site-footer__brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.site-footer__note {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--bone-muted);
+}
