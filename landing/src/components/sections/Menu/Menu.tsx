@@ -2,6 +2,7 @@ import { useId, useState } from 'react'
 import { SectionHeading, VisuallyHidden } from '../../ui'
 import { useLang, type DishId } from '../../../i18n'
 import { DISH_IDS, MEDIA } from '../../../data/site'
+import { useInView } from '../../../hooks/useInView'
 import './Menu.css'
 
 export function Menu() {
@@ -9,9 +10,16 @@ export function Menu() {
   const [active, setActive] = useState<DishId>('peshawari')
   const labelId = useId()
   const selected = t.dishes[active]
+  const ref = useInView<HTMLElement>()
 
   return (
-    <section className="section menu" id="menu" aria-labelledby="menu-title">
+    <section
+      className="section menu reveal-late"
+      id="menu"
+      aria-labelledby="menu-title"
+      ref={ref}
+    >
+      <div className="menu__aura" aria-hidden="true" />
       <div className="section__inner">
         <SectionHeading
           label={t.menuLabel}
@@ -57,10 +65,15 @@ export function Menu() {
             />
           </figure>
           <div className="menu__copy">
+            <p className="menu__index" aria-hidden="true">
+              {String(DISH_IDS.indexOf(active) + 1).padStart(2, '0')}
+            </p>
             <h3 className="menu__name">{selected.name}</h3>
             <p className="menu__desc">{selected.desc}</p>
             <p className="menu__price">
-              <VisuallyHidden>{t.priceLabel}</VisuallyHidden>৳{selected.price}
+              <VisuallyHidden>{t.priceLabel}</VisuallyHidden>
+              <span className="menu__currency">৳</span>
+              {selected.price}
             </p>
           </div>
         </div>

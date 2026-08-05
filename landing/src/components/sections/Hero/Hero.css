@@ -17,31 +17,61 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 45%;
-  transform: scale(1.04);
-  animation: hero-drift 18s var(--ease) infinite alternate;
+  object-position: center 42%;
+  transform: scale(1.05);
+  animation: hero-drift 20s var(--ease) infinite alternate;
 }
 
 .hero__veil {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(20, 17, 14, 0.5) 0%, rgba(20, 17, 14, 0.2) 35%, rgba(20, 17, 14, 0.9) 100%),
-    linear-gradient(90deg, rgba(20, 17, 14, 0.55) 0%, transparent 55%);
+    linear-gradient(
+      180deg,
+      rgba(18, 14, 11, 0.58) 0%,
+      rgba(18, 14, 11, 0.12) 32%,
+      rgba(18, 14, 11, 0.55) 62%,
+      rgba(18, 14, 11, 0.94) 100%
+    ),
+    linear-gradient(95deg, rgba(18, 14, 11, 0.72) 0%, rgba(18, 14, 11, 0.2) 48%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 70% 35%, rgba(200, 72, 40, 0.18) 0%, transparent 60%);
+}
+
+.hero__ember {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 42%;
+  background:
+    radial-gradient(ellipse 40% 50% at 18% 90%, rgba(232, 168, 32, 0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 45% at 55% 100%, rgba(200, 72, 40, 0.14) 0%, transparent 50%);
+  pointer-events: none;
+  animation: ember-pulse 7s ease-in-out infinite;
 }
 
 .hero__steam {
   position: absolute;
-  bottom: 35%;
-  left: 8%;
-  width: 45%;
-  height: 40%;
+  bottom: 32%;
+  left: 6%;
+  width: 48%;
+  height: 42%;
   background:
-    radial-gradient(ellipse at 30% 80%, rgba(240, 232, 220, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 70%, rgba(232, 168, 32, 0.08) 0%, transparent 45%);
-  filter: blur(20px);
-  animation: steam-sway 6s ease-in-out infinite;
+    radial-gradient(ellipse at 28% 80%, rgba(240, 232, 220, 0.12) 0%, transparent 52%),
+    radial-gradient(ellipse at 58% 68%, rgba(232, 168, 32, 0.1) 0%, transparent 48%),
+    radial-gradient(ellipse at 40% 55%, rgba(240, 232, 220, 0.06) 0%, transparent 40%);
+  filter: blur(22px);
+  animation: steam-sway 6.5s ease-in-out infinite;
   pointer-events: none;
+}
+
+.hero__steam--late {
+  left: auto;
+  right: 10%;
+  bottom: 40%;
+  width: 28%;
+  height: 30%;
+  opacity: 0.7;
+  animation-delay: -2.4s;
+  animation-duration: 7.5s;
 }
 
 .hero__content {
@@ -50,27 +80,39 @@
   width: 100%;
   max-width: var(--max);
   margin-inline: auto;
-  padding: var(--space-xl) var(--space-md) var(--space-lg);
+  padding: var(--space-xl) var(--space-md) calc(var(--space-lg) + 0.5rem);
 }
 
 .hero__brand {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: clamp(2.75rem, 9vw, 5rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
   color: var(--bone);
   margin-bottom: var(--space-sm);
-  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
+  text-shadow:
+    0 2px 40px rgba(0, 0, 0, 0.45),
+    0 0 80px rgba(232, 168, 32, 0.12);
+}
+
+.hero__brand::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  margin-top: 0.85rem;
+  background: linear-gradient(90deg, var(--saffron), var(--chili));
+  animation: brand-line 1.2s var(--ease) 0.35s both;
 }
 
 .hero__headline {
   font-family: var(--font-body);
-  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-size: clamp(1.4rem, 3.1vw, 1.95rem);
   font-weight: 400;
   font-style: italic;
-  color: var(--bone-muted);
-  max-width: 22ch;
+  color: rgba(240, 232, 220, 0.82);
+  max-width: 20ch;
   margin-bottom: var(--space-sm);
   line-height: 1.35;
 }
@@ -78,8 +120,8 @@
 .hero__support {
   font-family: var(--font-body);
   font-size: 1.1rem;
-  color: rgba(240, 232, 220, 0.78);
-  max-width: 34ch;
+  color: rgba(240, 232, 220, 0.72);
+  max-width: 32ch;
   margin-bottom: var(--space-md);
 }
 
@@ -91,27 +133,54 @@
 
 @keyframes hero-drift {
   from {
-    transform: scale(1.04) translate3d(0, 0, 0);
+    transform: scale(1.05) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
+    transform: scale(1.1) translate3d(-1.8%, -1.2%, 0);
   }
 }
 
 @keyframes steam-sway {
   0%,
   100% {
-    opacity: 0.7;
+    opacity: 0.65;
     transform: translateY(0) scaleX(1);
   }
   50% {
     opacity: 1;
-    transform: translateY(-12px) scaleX(1.08);
+    transform: translateY(-14px) scaleX(1.1);
+  }
+}
+
+@keyframes ember-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes brand-line {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 
 @media (max-width: 640px) {
   .hero__content {
     padding-bottom: var(--space-md);
+  }
+
+  .hero__steam--late {
+    display: none;
   }
 }

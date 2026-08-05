@@ -17,6 +17,7 @@
 
 .section {
   padding: var(--space-xl) var(--space-md);
+  position: relative;
 }
 
 .section__inner {
@@ -26,30 +27,41 @@
 
 .section__label {
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--saffron);
   margin-bottom: var(--space-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.section__label::before {
+  content: "";
+  width: 1.4rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--chili), var(--saffron));
 }
 
 .section__title {
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  font-size: clamp(1.95rem, 4.2vw, 2.9rem);
   font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   color: var(--bone);
   margin-bottom: var(--space-sm);
-  max-width: 22ch;
+  max-width: 18ch;
 }
 
 .section__lead {
   font-size: 1.2rem;
   color: var(--bone-muted);
-  max-width: 38ch;
+  max-width: 36ch;
   margin-bottom: var(--space-md);
+  line-height: 1.7;
 }
 
 .btn {
@@ -64,11 +76,13 @@
   text-decoration: none;
   border: none;
   cursor: pointer;
-  padding: 0.9rem 1.6rem;
+  padding: 0.95rem 1.7rem;
   transition:
     transform 0.25s var(--ease),
     background 0.25s var(--ease),
-    color 0.25s var(--ease);
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
 }
 
 .btn:active {
@@ -78,10 +92,12 @@
 .btn--primary {
   background: var(--saffron);
   color: var(--ink);
+  box-shadow: 0 0 0 0 transparent;
 }
 
 .btn--primary:hover {
   background: var(--bone);
+  box-shadow: 0 10px 30px rgba(232, 168, 32, 0.18);
 }
 
 .btn--ghost {
@@ -91,12 +107,26 @@
 }
 
 .btn--ghost:hover {
-  border-color: var(--bone);
-  background: rgba(240, 232, 220, 0.08);
+  border-color: var(--saffron);
+  color: var(--saffron);
+  background: var(--saffron-soft);
 }
 
 .reveal {
-  animation: reveal-up 0.9s var(--ease) both;
+  animation: reveal-up 0.95s var(--ease) both;
+}
+
+.reveal-late {
+  opacity: 0;
+  transform: translateY(1.4rem);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+}
+
+.reveal-late.is-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @keyframes reveal-up {

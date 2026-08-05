@@ -18,7 +18,9 @@ export function Hero() {
           fetchPriority="high"
         />
         <div className="hero__veil" />
+        <div className="hero__ember" />
         <div className="hero__steam" />
+        <div className="hero__steam hero__steam--late" />
       </div>
 
       <div className="hero__content reveal">
