@@ -1,11 +1,25 @@
-# ঘরের থালি — CSS Art
+# Ghorer Thali CSS Art (ঘরের থালি)
 
-পেশোয়ারি মাংস, মুরগির বিরিয়ানি ও গরুর কারি — মূলত CSS দিয়ে আঁকা ভোজের দৃশ্য।
+CSS-first feast scene for the
+[DEV Frontend Challenge: Comfort Food Edition](https://dev.to/challenges/frontend-2026-07-29)
+(**CSS Art** prompt).
 
-## প্রিভিউ
+Three comfort dishes built mostly with HTML and CSS:
+- Peshawari meat (namkeen-style broth, marrow, potato, peppercorns)
+- Chicken biryani
+- Beef curry
 
-`index.html` ব্রাউজারে খুলুন, অথবা:
+Bangla is the default language, with an English toggle. Click a dish to spotlight it and follow the aroma / steam (no eat animation).
+
+## Stack
+
+- Plain HTML
+- Pure CSS (gradients, keyframes, layering)
+- Light vanilla JS (language toggle, steam pause, dish focus)
+
+## Preview
+
+Open `index.html` in a browser, or:
 
 ```bash
 npx serve .
-```
