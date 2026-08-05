@@ -1,37 +1,30 @@
 import { useId, useState } from 'react'
-import { useLang } from '../lang'
+import { SectionHeading, VisuallyHidden } from '../../ui'
+import { useLang, type DishId } from '../../../i18n'
+import { DISH_IDS, MEDIA } from '../../../data/site'
 import './Menu.css'
-
-const dishIds = ['peshawari', 'curry', 'biryani'] as const
-
-const images = {
-  peshawari: '/images/peshawari.png',
-  curry:
-    'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=900&q=80',
-  biryani:
-    'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=900&q=80',
-} as const
 
 export function Menu() {
   const { t } = useLang()
-  const [active, setActive] = useState<(typeof dishIds)[number]>('peshawari')
+  const [active, setActive] = useState<DishId>('peshawari')
   const labelId = useId()
   const selected = t.dishes[active]
 
   return (
     <section className="section menu" id="menu" aria-labelledby="menu-title">
       <div className="section__inner">
-        <p className="section__label">{t.menuLabel}</p>
-        <h2 className="section__title" id="menu-title">
-          {t.menuTitle}
-        </h2>
-        <p className="section__lead">{t.menuLead}</p>
+        <SectionHeading
+          label={t.menuLabel}
+          title={t.menuTitle}
+          titleId="menu-title"
+          lead={t.menuLead}
+        />
 
         <div className="menu__picker" role="tablist" aria-labelledby={labelId}>
           <span id={labelId} className="visually-hidden">
             {t.menuListLabel}
           </span>
-          {dishIds.map((id) => {
+          {DISH_IDS.map((id) => {
             const isActive = id === active
             return (
               <button
@@ -56,7 +49,7 @@ export function Menu() {
         >
           <figure className="menu__visual">
             <img
-              src={images[active]}
+              src={MEDIA.dishes[active]}
               alt={selected.alt}
               width={900}
               height={600}
@@ -67,8 +60,7 @@ export function Menu() {
             <h3 className="menu__name">{selected.name}</h3>
             <p className="menu__desc">{selected.desc}</p>
             <p className="menu__price">
-              <span className="visually-hidden">{t.priceLabel}</span>৳
-              {selected.price}
+              <VisuallyHidden>{t.priceLabel}</VisuallyHidden>৳{selected.price}
             </p>
           </div>
         </div>

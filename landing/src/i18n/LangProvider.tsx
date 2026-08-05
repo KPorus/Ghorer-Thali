@@ -5,17 +5,18 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { copy, type Copy, type Lang } from './i18n'
+import { copy } from './copy'
+import type { Lang, LocaleCopy } from './types'
+
+const STORAGE_KEY = 'ghorer-thali-lang'
 
 type LangContextValue = {
   lang: Lang
-  t: Copy
+  t: LocaleCopy
   toggleLang: () => void
 }
 
 const LangContext = createContext<LangContextValue | null>(null)
-
-const STORAGE_KEY = 'ghorer-thali-lang'
 
 function readStoredLang(): Lang {
   try {

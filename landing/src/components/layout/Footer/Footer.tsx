@@ -1,4 +1,4 @@
-import { useLang } from '../lang'
+import { useLang } from '../../../i18n'
 import './Footer.css'
 
 export function Footer() {

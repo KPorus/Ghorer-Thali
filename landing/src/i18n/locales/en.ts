@@ -1,0 +1,61 @@
+import type { LocaleCopy } from '../types'
+
+export const en: LocaleCopy = {
+  skip: 'Skip to content',
+  brand: 'Ghorer Thali',
+  brandHome: 'Ghorer Thali home',
+  navLabel: 'Primary',
+  navStory: 'Story',
+  navMenu: 'Menu',
+  navVisit: 'Visit',
+  langSwitch: 'বাংলা',
+  langAria: 'Switch to Bangla',
+  heroHeadline: 'The feast you come home for.',
+  heroSupport:
+    'Peshawari meat, slow beef curry, and chicken biryani. Cooked like ammi used to.',
+  heroCtaMenu: 'See the menu',
+  heroCtaVisit: 'Find the kitchen',
+  storyLabel: 'From our kitchen',
+  storyTitle: 'Slow fire. Whole spices. No rush.',
+  storyLead:
+    'We grind masala before dawn, simmer Peshawari meat in a light savory broth, and steam biryani under a sealed lid. The same patience that turns a weeknight meal into a celebration.',
+  storyAlt: 'A rich South Asian curry served with rice',
+  menuLabel: "Today's thali",
+  menuTitle: 'Pick your comfort.',
+  menuLead:
+    'Three dishes that never leave the menu. Choose one for details. Then come hungry.',
+  menuListLabel: 'Dish options',
+  priceLabel: 'Price: ',
+  dishes: {
+    peshawari: {
+      name: 'Peshawari Meat',
+      desc: 'Bone-in meat chunks in a light golden broth with soft potatoes, whole green chilies, and garlic. Simple namkeen-style comfort, fragrant and homestyle. Best with warm roti or naan.',
+      price: '1800',
+      alt: 'Glass dish of Peshawari meat with bone-in chunks, potatoes, and light broth',
+    },
+    curry: {
+      name: 'Beef Curry',
+      desc: 'Slow-simmered gravy with caramelized onions, whole spices, and marrow-rich depth. Best with warm roti or naan.',
+      price: '1600',
+      alt: 'A bowl of rich beef curry',
+    },
+    biryani: {
+      name: 'Chicken Biryani',
+      desc: 'Layered basmati, saffron milk, fried onions, and bone-in chicken steamed under a sealed lid until it smells like home.',
+      price: '1500',
+      alt: 'A platter of chicken biryani with rice',
+    },
+  },
+  visitLabel: 'Find us',
+  visitTitle: 'Come when the dum is ready.',
+  visitLead: 'Take a seat at the family table. No frills, just steam and spice.',
+  visitAddress: 'Address',
+  visitAddressBody: ['28 Islampur Road', 'Chawkbazar, Old Dhaka'],
+  visitHours: 'Hours',
+  visitHoursBody: ['Daily · 12:00 PM to 10:30 PM', 'Friday lunch from 1:00 PM'],
+  visitReserve: 'Reservations',
+  visitReserveBody: ['Walk-ins welcome.', 'Large thalis: call ahead.'],
+  visitCta: 'Write the kitchen',
+  footerNote: 'Comfort Food Edition · DEV Frontend Challenge 2026',
+  documentTitle: 'Ghorer Thali: Home-Table Comfort',
+}

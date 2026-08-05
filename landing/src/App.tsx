@@ -1,20 +1,20 @@
-import { Header } from './components/Header'
-import { Hero } from './components/Hero'
-import { Story } from './components/Story'
-import { Menu } from './components/Menu'
-import { Visit } from './components/Visit'
-import { Footer } from './components/Footer'
-import { useLang } from './lang'
-import './App.css'
+import {
+  Footer,
+  Header,
+  Hero,
+  Menu,
+  SkipLink,
+  Story,
+  Visit,
+} from './components'
+import { useLang } from './i18n'
 
-function App() {
+export default function App() {
   const { t } = useLang()
 
   return (
     <>
-      <a className="skip-link" href="#main">
-        {t.skip}
-      </a>
+      <SkipLink>{t.skip}</SkipLink>
       <Header />
       <main id="main">
         <Hero />
@@ -26,5 +26,3 @@ function App() {
     </>
   )
 }
-
-export default App

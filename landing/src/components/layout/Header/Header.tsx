@@ -1,8 +1,10 @@
-import { useLang } from '../lang'
+import { LangToggle } from '../../ui'
+import { useLang } from '../../../i18n'
+import { NAV_LINKS } from '../../../data/site'
 import './Header.css'
 
 export function Header() {
-  const { t, toggleLang } = useLang()
+  const { t } = useLang()
 
   return (
     <header className="site-header">
@@ -12,18 +14,13 @@ export function Header() {
         </a>
         <div className="site-header__right">
           <nav className="site-header__nav" aria-label={t.navLabel}>
-            <a href="#story">{t.navStory}</a>
-            <a href="#menu">{t.navMenu}</a>
-            <a href="#visit">{t.navVisit}</a>
+            {NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href}>
+                {t[link.labelKey]}
+              </a>
+            ))}
           </nav>
-          <button
-            type="button"
-            className="lang-toggle"
-            onClick={toggleLang}
-            aria-label={t.langAria}
-          >
-            {t.langSwitch}
-          </button>
+          <LangToggle />
         </div>
       </div>
     </header>

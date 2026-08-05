@@ -31,6 +31,21 @@ Bangla is the default language, with an English toggle.
 - Bangla / English i18n (`localStorage`)
 - Accessibility: skip link, semantic landmarks, focus styles, reduced motion
 
+## Project structure
+
+```text
+src/
+  App.tsx
+  main.tsx
+  styles/           # tokens + shared UI CSS
+  i18n/             # locales (bn/en), LangProvider, types
+  data/site.ts      # media URLs, nav, visit field keys
+  components/
+    ui/             # Button, SectionHeading, SkipLink, LangToggle
+    layout/         # Header, Footer
+    sections/       # Hero, Story, Menu, Visit
+```
+
 ## Local development
 
 ```bash
